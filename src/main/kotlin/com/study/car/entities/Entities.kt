@@ -4,6 +4,7 @@ import java.time.LocalDate
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.ManyToOne
 
 @Entity
 data class Driver (
@@ -20,6 +21,18 @@ data class Passenger (
     @GeneratedValue
     val id : Long? = null,
     val name: String
+)
+
+@Entity
+data class TravelRequest(
+    @Id
+    @GeneratedValue
+    val id : Long? = null,
+
+    @ManyToOne
+    val passenger : Passenger,
+    val origin : String,
+    val destination : String
 )
 
 data class PatchDriver (
