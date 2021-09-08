@@ -1,6 +1,7 @@
 package com.study.car.entities
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -32,7 +33,9 @@ data class TravelRequest(
     @ManyToOne
     val passenger : Passenger,
     val origin : String,
-    val destination : String
+    val destination : String,
+    val status: TravelRequestStatus = TravelRequestStatus.CREATED,
+    val creationDate: LocalDateTime = LocalDateTime.now()
 )
 
 data class PatchDriver (
@@ -43,3 +46,21 @@ data class PatchDriver (
 data class PatchPassenger (
     val name : String?
 )
+
+data class TravelRequestInput (
+    val passengerId: Long,
+    val origin: String,
+    val destination: String
+)
+
+data class TravelRequestOutput(
+    val id : Long,
+    val origin : String,
+    val destination : String,
+    val status: TravelRequestStatus,
+    val creationDate: LocalDateTime
+)
+
+enum class TravelRequestStatus {
+    CREATED, ACCEPTED, REFUSED
+}
