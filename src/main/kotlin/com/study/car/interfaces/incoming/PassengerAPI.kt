@@ -1,4 +1,4 @@
-package com.study.car.interfaces
+package com.study.car.interfaces.incoming
 
 import com.study.car.entities.Passenger
 import com.study.car.entities.PassengerRepository
