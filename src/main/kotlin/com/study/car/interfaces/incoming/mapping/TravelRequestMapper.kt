@@ -1,6 +1,6 @@
 package com.study.car.interfaces.incoming.mapping
 
-import com.study.car.entities.PassengerRepository
+import com.study.car.domain.PassengerRepository
 import com.study.car.entities.TravelRequest
 import com.study.car.entities.TravelRequestInput
 import com.study.car.entities.TravelRequestOutput
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component
 import org.springframework.web.server.ResponseStatusException
 
 @Component
-class TravelRequestMapper (
+class TravelRequestMapper(
     val passengerRepository: PassengerRepository
 ) {
-    fun map (input: TravelRequestInput) : TravelRequest {
+    fun map(input: TravelRequestInput): TravelRequest {
         val passenger = passengerRepository
             .findById(input.passengerId).orElseThrow() { ResponseStatusException(HttpStatus.NOT_FOUND) }
 
@@ -26,20 +26,20 @@ class TravelRequestMapper (
         )
     }
 
-    fun map (travelRequest: TravelRequest) : TravelRequestOutput {
+    fun map(travelRequest: TravelRequest): TravelRequestOutput {
         return TravelRequestOutput(
-          id = travelRequest.id!!,
-          origin = travelRequest.origin,
-          destination = travelRequest.destination,
-          status = travelRequest.status,
-          creationDate = travelRequest.creationDate
+            id = travelRequest.id!!,
+            origin = travelRequest.origin,
+            destination = travelRequest.destination,
+            status = travelRequest.status,
+            creationDate = travelRequest.creationDate
         )
     }
 
-    fun buildOutputModel (
+    fun buildOutputModel(
         travelRequest: TravelRequest,
-        output: TravelRequestOutput ) : EntityModel<TravelRequestOutput>
-    {
+        output: TravelRequestOutput
+    ): EntityModel<TravelRequestOutput> {
         val passengerLink = WebMvcLinkBuilder
             .linkTo(PassengerAPI::class.java)
             .slash(travelRequest.passenger.id)
@@ -48,4 +48,8 @@ class TravelRequestMapper (
 
         return EntityModel.of(output, passengerLink)
     }
+
+    fun buildOutputModel(
+        requests: List<TravelRequest>
+    ) = requests.map { buildOutputModel(it, map(it)) }
 }

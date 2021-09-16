@@ -1,7 +1,7 @@
 package com.study.car.interfaces.incoming
 
 import com.study.car.entities.Driver
-import com.study.car.entities.DriverRepository
+import com.study.car.domain.DriverRepository
 import com.study.car.entities.PatchDriver
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType

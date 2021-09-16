@@ -24,7 +24,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.hateoas:spring-hateoas:1.3.3")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas:2.5.4")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("com.jayway.jsonpath:json-path:2.6.0")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
