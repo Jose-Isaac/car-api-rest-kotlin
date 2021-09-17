@@ -7,10 +7,12 @@ import com.study.car.interfaces.incoming.mapping.TravelRequestMapper
 import org.springframework.hateoas.EntityModel
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 @Service
 @RestController
@@ -24,12 +26,22 @@ class TravelRequestAPI(
 ) {
     @PostMapping
     fun makeTravelRequest(
-        @RequestBody travelRequestInput: TravelRequestInput ) : EntityModel<TravelRequestOutput>
-    {
+        @RequestBody travelRequestInput: TravelRequestInput
+    ): EntityModel<TravelRequestOutput> {
         val travelRequest = travelService.saveTravelService(mapper.map(travelRequestInput))
 
         val output = mapper.map(travelRequest)
 
         return mapper.buildOutputModel(travelRequest, output)
+    }
+
+    @GetMapping("/nearby")
+    fun listNearByRequests(
+        @RequestParam
+        currentAddress: String
+    ): List<EntityModel<TravelRequestOutput>> {
+
+        val requests = travelService.listNearbyTravelRequests(currentAddress)
+        return mapper.buildOutputModel(requests)
     }
 }

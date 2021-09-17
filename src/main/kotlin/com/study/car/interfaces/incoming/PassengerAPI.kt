@@ -1,7 +1,7 @@
 package com.study.car.interfaces.incoming
 
 import com.study.car.entities.Passenger
-import com.study.car.entities.PassengerRepository
+import com.study.car.domain.PassengerRepository
 import com.study.car.entities.PatchPassenger
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
