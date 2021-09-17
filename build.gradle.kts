@@ -25,6 +25,7 @@ dependencies {
 	implementation("org.springframework.hateoas:spring-hateoas:1.3.3")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas:2.5.4")
     implementation("com.jayway.jsonpath:json-path:2.6.0")
+    implementation("io.rest-assured:spring-mock-mvc:4.4.0")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
